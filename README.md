@@ -1,21 +1,63 @@
-# 📡 RiskPulse — AI/NLP Financial Risk Engine
+# RiskPulse: AI/NLP Financial Risk Engine - S&P Global & Crisil Campus Hackathon
 
-Ingests unstructured text (news + social), turns it into structured, machine-readable risk
-signals, and drives **both** downstream modules:
+**Candidate Name:** Ayushi Sehgal
+**College Email ID:** ayushi.23bce10790@vitbhopal.ac.in
+**College / Campus:** Vellore Institute of Technology (VIT), Bhopal
+**Demo Video Link:** [ADD YOUTUBE UNLISTED LINK]
+**Live App:** https://riskpulse-as.streamlit.app/
+**Slide Deck Link (if hosted externally):** Included in repo at `docs/presentation.pdf`
 
-* **Module A** – tactical, sentiment-driven index rebalancer (15 S&P 100 stocks)
-* **Module B** – strategic, event-driven stress-testing of a synthetic wholesale-banking portfolio
+## 1. Project Overview / Problem Statement & Approach
+Markets react to news and social media within minutes, but risk systems consume structured numbers. RiskPulse is a
+unified AI/NLP risk engine that ingests unstructured text from two sources (financial news and Twitter/X-style posts)
+and converts each document into a structured, machine-readable risk signal: a sentiment score (-1 to 1), an event
+classification (Geopolitical, Macroeconomic, Credit Event, Merger/Acquisition, Product Launch, Regulatory, Earnings),
+and an impact score (1 to 10).
 
+To demonstrate the signals in practice, **both** downstream modules are implemented. **Module A** is a tactical
+index rebalancer that shifts the weights of 15 S&P 100 stocks based on smoothed, impact-weighted sentiment.
+**Module B** is a strategic stress-testing tool that applies scaled shock scenarios to a synthetic wholesale-banking
+portfolio (loans, bonds, derivatives, equity) whenever a high-impact event (impact > 7) is detected.
+
+## 2. Architecture & Tech Stack
+![Architecture](docs/architecture.png)
+
+- **Languages/Frameworks:** Python, Streamlit (dashboard), FastAPI (REST API), Plotly
+- **NLP:** VADER with a custom finance lexicon, weighted-regex event classifier, rule-based impact scoring
+  (optional FinBERT via `USE_FINBERT=1`)
+- **Data/Numerics:** pandas, NumPy; optional yfinance for live prices
+- **Design:** the engine publishes signals; Module A and Module B subscribe to them (publish/subscribe). Output is also
+  written to `output/signals.jsonl` and served via REST.
+
+## 3. Dataset Used
+- `data/sample_news.json` (28 headlines) and `data/sample_tweets.json` (24 posts): **synthetic**, written by the
+  candidate to mirror real news/social text. No proprietary or client data is used.
+- `data/sample_transactions.csv` (40 transactions): **synthetic** wholesale-banking transactions used to build the
+  Module B portfolio. Real datasets (Kaggle stock tweets, financial transactions) can be plugged in via
+  `load_tweets_csv()` and `build_portfolio(path)`.
+- Optional live news: GDELT DOC 2.0 API (public, no key) and NewsAPI (free key), with automatic fallback to the sample.
+- Assumptions: shock sizes in Module B are illustrative, not calibrated; headlines are analysed at sentence level.
+
+## 4. Quickstart & Installation
+Runtime: Python 3.11 / 3.12 on Windows 11 (also runs on Linux/macOS)
+
+```bash
+git clone https://github.com/ayushisehgal/vitbhopal-ayushi-sehgal-hackathon.git
+cd vitbhopal-ayushi-sehgal-hackathon
+pip install -r requirements.txt
+python -m pytest -q                 # 8 tests
+streamlit run app.py                # dashboard (run command)
 ```
- GDELT / NewsAPI ─┐                                   ┌─► Module A  IndexRebalancer  (Sentiment Score)
-                  ├─► Ingestion ─► NLP Risk Engine ───┤
- Tweets (Kaggle)  ┘   (dedupe)    sentiment · event ·  └─► Module B  StressTester     (Event + Impact)
-                                   impact · tickers          │
-                                        │                    ▼
-                                        ├─► signals.jsonl   Streamlit dashboard
-                                        └─► REST API (FastAPI)
-```
+Other entry points: `uvicorn riskpulse.api:app --reload` (API at /docs) and `python -m riskpulse.pipeline` (CLI).
 
+## 5. Key Results & Domain Impact
+- 52 signals scored from two sources; sample run: NVDA and MSFT rise to the 15% cap (+833 bps), BAC falls to the 2% floor (-464 bps).
+- 9 stress tests triggered; a Geopolitical event with impact 10 reduces the synthetic portfolio from $2,435m to $2,313m (-5.0%).
+- Impact: turns unstructured text into actionable, quantified risk that can drive both tactical (index weights) and
+  strategic (portfolio stress) decisions faster than manual monitoring.
+
+---
+# Details
 ## Engine output (one JSON object per document)
 ```json
 {"id":"47d338f3afae","timestamp":"2026-10-11T12:48:40Z","source":"news","text":"Goldman Sachs beats earnings",
@@ -27,7 +69,7 @@ signals, and drives **both** downstream modules:
 | `event_type` | Geopolitical, Macroeconomic, Credit Event, Merger/Acquisition, Product Launch, Regulatory, Earnings, Other | weighted regex evidence, with confidence |
 | `impact_score` | 1 … 10 | (event base severity + intensifier keywords + 2·\|sentiment\|) × source weight |
 
-## Quick start
+## Extra commands
 ```bash
 pip install -r requirements.txt
 python -m pytest -q                 # 8 tests
