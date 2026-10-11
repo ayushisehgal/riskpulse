@@ -3,7 +3,7 @@
 **Candidate Name:** Ayushi Sehgal
 **College Email ID:** ayushi.23bce10790@vitbhopal.ac.in
 **College / Campus:** Vellore Institute of Technology (VIT), Bhopal
-**Demo Video Link:** [ADD YOUTUBE UNLISTED LINK]
+**Demo Video Link:** https://www.loom.com/share/0e827ea5db9b451eb580d5cd6a016820
 **Live App:** https://riskpulse-as.streamlit.app/
 **Slide Deck Link (if hosted externally):** Included in repo at `docs/presentation.pdf`
 
