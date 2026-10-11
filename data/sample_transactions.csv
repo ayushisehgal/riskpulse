@@ -1,0 +1,41 @@
+txn_id,product,counterparty,sector,rating,amount_usd_m,tenor_years
+T001,Corporate Bond,CP-150,Industrials,A,10.6,7
+T002,Term Loan,CP-174,Energy,BBB,109.6,2
+T003,Term Loan,CP-155,Healthcare,AA,13.0,1
+T004,Interest Rate Swap,CP-107,Consumer,BB,19.2,2
+T005,Equity Option,CP-107,Consumer,B,72.3,1
+T006,Revolver,CP-171,Technology,AA,38.3,2
+T007,Interest Rate Swap,CP-173,Financials,AA,69.4,10
+T008,Revolver,CP-174,Consumer,AA,78.5,3
+T009,Term Loan,CP-191,Energy,B,69.9,7
+T010,Revolver,CP-187,Consumer,BB,54.2,3
+T011,Government Bond,CP-174,Healthcare,AAA,46.6,2
+T012,Equity Holding,CP-189,Technology,A,14.4,3
+T013,Interest Rate Swap,CP-143,Industrials,BB,56.6,7
+T014,Term Loan,CP-165,Healthcare,AA,24.0,3
+T015,Revolver,CP-153,Energy,BB,115.6,1
+T016,Equity Holding,CP-143,Industrials,A,45.3,5
+T017,Interest Rate Swap,CP-108,Energy,BB,113.6,5
+T018,Equity Option,CP-107,Industrials,AA,85.7,10
+T019,Interest Rate Swap,CP-136,Industrials,BB,49.4,10
+T020,Corporate Bond,CP-159,Financials,AA,24.3,1
+T021,Government Bond,CP-107,Technology,AAA,93.3,2
+T022,Equity Option,CP-150,Healthcare,A,110.4,5
+T023,Term Loan,CP-157,Healthcare,A,68.2,2
+T024,Equity Holding,CP-170,Financials,A,86.2,3
+T025,Equity Option,CP-129,Technology,BB,14.5,2
+T026,Revolver,CP-101,Healthcare,A,100.6,2
+T027,Corporate Bond,CP-100,Technology,BBB,53.2,3
+T028,Interest Rate Swap,CP-140,Technology,B,84.4,7
+T029,Interest Rate Swap,CP-158,Industrials,AA,96.8,5
+T030,Government Bond,CP-151,Healthcare,AAA,16.9,10
+T031,Government Bond,CP-107,Technology,AAA,12.7,2
+T032,Government Bond,CP-120,Energy,AAA,44.1,1
+T033,Term Loan,CP-172,Technology,AA,66.7,3
+T034,Interest Rate Swap,CP-109,Technology,AA,75.6,2
+T035,Equity Option,CP-144,Consumer,BBB,46.9,1
+T036,Term Loan,CP-159,Healthcare,BB,60.6,1
+T037,Revolver,CP-195,Financials,AA,90.1,5
+T038,Equity Holding,CP-166,Energy,A,28.6,7
+T039,Corporate Bond,CP-188,Consumer,A,110.1,7
+T040,Corporate Bond,CP-189,Financials,AA,64.6,2
